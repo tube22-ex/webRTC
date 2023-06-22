@@ -1,64 +1,42 @@
 let localStream;
-
-document.getElementById('CameraMode').addEventListener("change",()=>{
-
-  if(document.getElementById('CameraMode').checked == true){
-    let mode = `{facingMode: { exact: "environment" }}`
-      camera(mode)
-  }else{
-      let mode =  `{facingMode: "user"}`
-      camera(mode)
+const st_option = {
+  video: true,
+  audio: {
+      sampleRate: 44100
   }
-})
-
-
-function camera(Mode) {
-// カメラ映像取得
-navigator.mediaDevices.getUserMedia({video: Mode, audio: true})
-  .then( stream => {
-  // 成功時にvideo要素にカメラ映像をセットし、再生
-  const videoElm = document.getElementById('my-video');
-  videoElm.srcObject = stream;
-  videoElm.play();
-  // 着信時に相手にカメラ映像を返せるように、グローバル変数に保存しておく
-  localStream = stream;
-}).catch( error => {
-  // 失敗時にはエラーログを出力
-  console.error('mediaDevice.getUserMedia() error:', error);
-  return;
-});
 }
+document.getElementById('btn00').onclick = () => {
+camera();
+function camera() {
+navigator.mediaDevices.getDisplayMedia(st_option)
+  .then( stream => {
+  const v = document.getElementById('myV');
+  v.srcObject = stream;
+  v.play();
+  localStream = stream;
+  document.getElementById('shareID').textContent = "接続ID: " + peer.id;
+  document.getElementById('myV').innerHTML = `<video id="myV" width="400px" autoplay playsinline controls></video>`
+})
+}
+}
+const peer = new Peer({key: 'b2ec5df0-85b1-4e32-965f-072a7379a325'});
 
 
-  //Peer作成
-  const peer = new Peer({
-    key: 'b2ec5df0-85b1-4e32-965f-072a7379a325',
-    debug: 3
-  });
-
-  //PeerID取得
-peer.on('open', () => {
-    document.getElementById('my-id').textContent = peer.id;
-});
-
-// 発信処理
-document.getElementById('make-call').onclick = () => {
-    const theirID = document.getElementById('their-id').value;
-    const mediaConnection = peer.call(theirID, localStream);
+document.getElementById('btn').onclick = () => {
+    const ID = document.getElementById('ID').value;
+    const mediaConnection = peer.call(ID, localStream);
     setEventListener(mediaConnection);
   };
   
-  // イベントリスナを設置する関数
+  // 相手側のやつ
   const setEventListener = mediaConnection => {
     mediaConnection.on('stream', stream => {
-      // video要素にカメラ映像をセットして再生
-      const videoElm = document.getElementById('their-video')
-      videoElm.srcObject = stream;
-      videoElm.play();
+      const v = document.getElementById('shareV')
+      v.srcObject = stream;
+      v.play();
     });
   }
 
-  //着信処理
 peer.on('call', mediaConnection => {
     mediaConnection.answer(localStream);
     setEventListener(mediaConnection);
