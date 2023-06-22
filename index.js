@@ -1,6 +1,6 @@
 let localStream;
 
-document.getElementById('CameraMode').addEventListener(change,()=>{
+document.getElementById('CameraMode').addEventListener("change",()=>{
 
   if(document.getElementById('CameraMode').checked == true){
     let mode = `facingMode: { exact: "environment" }`
