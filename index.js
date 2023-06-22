@@ -6,8 +6,7 @@ const st_option = {
   }
 }
 document.getElementById('btn00').onclick = () => {
-camera();
-function camera() {
+
 navigator.mediaDevices.getDisplayMedia(st_option)
   .then( stream => {
   const v = document.getElementById('myV');
@@ -17,7 +16,7 @@ navigator.mediaDevices.getDisplayMedia(st_option)
   document.getElementById('shareID').textContent = "接続ID: " + peer.id;
   document.getElementById('myV').innerHTML = `<video id="myV" width="400px" autoplay playsinline controls></video>`
 })
-}
+
 }
 const peer = new Peer({key: 'b2ec5df0-85b1-4e32-965f-072a7379a325'});
 
