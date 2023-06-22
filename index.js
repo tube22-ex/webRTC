@@ -14,7 +14,10 @@ navigator.mediaDevices.getDisplayMedia(st_option)
   v.play();
   localStream = stream;
   document.getElementById('shareID').textContent = "接続ID: " + peer.id;
-  document.getElementById('myV').innerHTML = `<video id="myV" width="400px" autoplay playsinline controls></video>`
+  const mv = document.getElementById('myV')
+  mv.setAttribute("autoplay")
+  mv.setAttribute("playsinline")
+  mv.setAttribute("controls")
 })
 
 }
