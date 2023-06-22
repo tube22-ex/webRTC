@@ -1,7 +1,7 @@
 let localStream;
 
 // カメラ映像取得
-navigator.mediaDevices.getUserMedia({video: true, audio: true})
+navigator.mediaDevices.getUserMedia({video: true, audio: true,  facingMode: { exact: "environment" }},})
   .then( stream => {
   // 成功時にvideo要素にカメラ映像をセットし、再生
   const videoElm = document.getElementById('my-video');
