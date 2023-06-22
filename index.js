@@ -3,10 +3,10 @@ let localStream;
 document.getElementById('CameraMode').addEventListener("change",()=>{
 
   if(document.getElementById('CameraMode').checked == true){
-    let mode = `facingMode: { exact: "environment" }`
+    let mode = `{facingMode: { exact: "environment" }}`
       camera(mode)
   }else{
-      let mode =  `facingMode: "user"`
+      let mode =  `f{facingMode: "user"}`
       camera(mode)
   }
 })
@@ -14,7 +14,7 @@ document.getElementById('CameraMode').addEventListener("change",()=>{
 
 function camera(Mode) {
 // カメラ映像取得
-navigator.mediaDevices.getUserMedia({video: true, audio: true,Mode})
+navigator.mediaDevices.getUserMedia({video: Mode, audio: true})
   .then( stream => {
   // 成功時にvideo要素にカメラ映像をセットし、再生
   const videoElm = document.getElementById('my-video');
