@@ -1,13 +1,16 @@
 let localStream;
-let facingMode;
 
-if(document.getElementById('CameraMode').checked == true){
-let mode = `facingMode: { exact: "environment" }`
-  camera(mode)
-}else{
-  let mode =  `facingMode: "user"`
-  camera(mode)
-}
+document.getElementById('CameraMode').addEventListener(change,()=>{
+
+  if(document.getElementById('CameraMode').checked == true){
+    let mode = `facingMode: { exact: "environment" }`
+      camera(mode)
+  }else{
+      let mode =  `facingMode: "user"`
+      camera(mode)
+  }
+})
+
 
 function camera(Mode) {
 // カメラ映像取得
