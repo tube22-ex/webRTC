@@ -1,7 +1,15 @@
 let localStream;
+let facingMode;
 
+if(document.getElementById('CameraMode').checked == true){
+facingMode = `facingMode: { exact: "environment" }`
+  
+}else{
+facingMode = `facingMode: "user"`
+  
+}
 // カメラ映像取得
-navigator.mediaDevices.getUserMedia({video: true, audio: true,facingMode: { exact: "environment" }})
+navigator.mediaDevices.getUserMedia({video: true, audio: true,facingMode})
   .then( stream => {
   // 成功時にvideo要素にカメラ映像をセットし、再生
   const videoElm = document.getElementById('my-video');
