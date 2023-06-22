@@ -2,14 +2,16 @@ let localStream;
 let facingMode;
 
 if(document.getElementById('CameraMode').checked == true){
-facingMode = `facingMode: { exact: "environment" }`
-  
+let mode = `facingMode: { exact: "environment" }`
+  camera(mode)
 }else{
-facingMode = `facingMode: "user"`
-  
+  let mode =  `facingMode: "user"`
+  camera(mode)
 }
+
+function camera(Mode) {
 // カメラ映像取得
-navigator.mediaDevices.getUserMedia({video: true, audio: true,facingMode})
+navigator.mediaDevices.getUserMedia({video: true, audio: true,Mode})
   .then( stream => {
   // 成功時にvideo要素にカメラ映像をセットし、再生
   const videoElm = document.getElementById('my-video');
@@ -22,6 +24,8 @@ navigator.mediaDevices.getUserMedia({video: true, audio: true,facingMode})
   console.error('mediaDevice.getUserMedia() error:', error);
   return;
 });
+}
+
 
   //Peer作成
   const peer = new Peer({
