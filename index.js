@@ -6,7 +6,7 @@ document.getElementById('CameraMode').addEventListener("change",()=>{
     let mode = `{facingMode: { exact: "environment" }}`
       camera(mode)
   }else{
-      let mode =  `f{facingMode: "user"}`
+      let mode =  `{facingMode: "user"}`
       camera(mode)
   }
 })
