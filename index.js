@@ -37,7 +37,7 @@ document.getElementById('btn').onclick = () => {
     document.getElementById('messageInput').onchange =()=>{
     let CN = document.getElementById('chatName').value;
     let ChatName = '';
-    if(CN == ''){ChatName = ID}else{ChatName = CN};
+    if(CN == ''){ChatName = peer.id}else{ChatName = CN};
       ChatText = document.getElementById('messageInput').value
     dataConnection.send(ChatName +": " + ChatText);
     document.getElementById('messageInput').value = '';
