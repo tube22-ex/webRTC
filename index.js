@@ -36,8 +36,10 @@ document.getElementById('btn').onclick = () => {
   alert(ID + "に接続")
   //alert(peer.id)
     document.getElementById('messageInput').onchange =()=>{
+    const CN = document.getElementById('chatName').value;
+    if(CN == ''){CN = ID};
       ChatText = document.getElementById('messageInput').value
-    dataConnection.send(ChatText);
+    dataConnection.send(CN +": " + ChatText);
     document.getElementById('messageInput').value = '';
     let chatEle = document.createElement('div');
     chatEle.innerHTML = `<div class="chatEle" style="border: 1px solid black;">${ChatText}</div>`
