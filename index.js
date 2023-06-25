@@ -16,7 +16,6 @@ navigator.mediaDevices.getDisplayMedia(st_option)
   localStream = stream;
   document.getElementById('shareID').textContent = "接続ID: " + peer.id;
   let mv = document.getElementById('myV')
-  mv.setAttribute("autoplay",'')
   mv.setAttribute("playsinline",'')
   mv.setAttribute("controls",'')
   document.getElementById('shareV').style.display = 'none'
