@@ -42,19 +42,15 @@ document.getElementById('btn').onclick = () => {
       ChatText = document.getElementById('messageInput').value
     dataConnection.send(ChatName +": " + ChatText);
     document.getElementById('messageInput').value = '';
-    let chatEle = document.createElement('div');
-    chatEle.innerHTML = `<div class="chatEle" style="border: 1px solid black;">${ChatName +": " + ChatText}</div>`
-    document.getElementById('chatMessage').appendChild(chatEle);
+    document.getElementById('chatMessage').insertAdjacentHTML('beforeend',`<div class="chatEle" style="border: 1px solid black;">${ChatName +": " + ChatText}</div>`)
     }
 
 };
 
 peer.on('connection', (conn) => {
   conn.on('data', (data) => {
-    let chatEle = document.createElement('div');
-    chatEle.innerHTML = `<div class="chatEle" style="border: 1px solid black;">${data}</div>`
-    document.getElementById('chatMessage').appendChild(chatEle);
-  });
+    document.getElementById('chatMessage').insertAdjacentHTML('beforeend',`<div class="chatEle" style="border: 1px solid black;">${data}</div>`)
+  })
 });
 
 //映像
