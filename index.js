@@ -36,13 +36,14 @@ document.getElementById('btn').onclick = () => {
   alert(ID + "に接続")
   //alert(peer.id)
     document.getElementById('messageInput').onchange =()=>{
-    const CN = document.getElementById('chatName').value;
-    if(CN == ''){CN = ID};
+    let CN = document.getElementById('chatName').value;
+    let ChatName = '';
+    if(CN == ''){ChatName = ID}else{ChatName = CN};
       ChatText = document.getElementById('messageInput').value
-    dataConnection.send(CN +": " + ChatText);
+    dataConnection.send(ChatName +": " + ChatText);
     document.getElementById('messageInput').value = '';
     let chatEle = document.createElement('div');
-    chatEle.innerHTML = `<div class="chatEle" style="border: 1px solid black;">${ChatText}</div>`
+    chatEle.innerHTML = `<div class="chatEle" style="border: 1px solid black;">${ChatName +": " + ChatText}</div>`
     document.getElementById('chatMessage').appendChild(chatEle);
     }
 
